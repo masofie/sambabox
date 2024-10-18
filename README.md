@@ -1,4 +1,4 @@
-# sambabox
+# SambaBox : Gestión de Dominio , Usuarios y Servicios
 
 
 **SambaBox** es una herramienta que integra la entornos virtualizados utilizando **Vagrant** y **Samba-Tool**  para gestionar los dominios . 
