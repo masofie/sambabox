@@ -11,4 +11,7 @@ En nuestro espacio tendremos 4 máquinas , que son las siguientes :
 - **Máquina Clientes :** con Windows e Ubuntu para probar el funcionamiento del dominio con 
 - los usuarios finales .
 
+Con todo esto buscamos crear un entorno donde los equipos estén conectados al dominio de 
+forma automatizadas , garantizando una administración centralizada y eficiente .
+
 - [Contenido](./configuracion/README.md)
