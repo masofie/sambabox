@@ -25,4 +25,7 @@ Y ademas se instalá **Samba-Tool**  mediante scripts para automatizar la creaci
 dominio dentro de la red , permitido administrar usuarios y permisos . 
 
 
+![Esquema de la Red](./configuracion/imagenes/esquema_red.png)
+
+
 - [Contenido](./configuracion/README.md)
