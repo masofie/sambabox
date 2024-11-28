@@ -11,6 +11,8 @@
     - [2.1 Configuración Básica](#21-configuración-básica)
     - [2.2 Instalación de Paquetes Necesarios](#22-instalación-de-paquetes-necesarios)
     - [2.3 Comprobaciones](#23-comprobaciones)
+  - [3. Archivo Necesario](#3-archivo-necesario)
+    - [3.1 Vagrantfile](#31-vagrantfile)
 
 
 ## 1. Windows 10
@@ -170,3 +172,50 @@ samba-tool computer list
 ~~~
 
 ![Cliente Linux - Comando computer](./img/cliente_linux/9_cliente_linux_comando_computer.png)
+
+## 3. Archivo Necesario
+### 3.1 Vagrantfile
+
+~~~
+# Variables
+interfaz_bridge="eno1"
+ip_pub="192.168.1.100"
+mascara="255.255.255.0"
+
+Vagrant.configure("2") do |config|
+	config.vm.box = "generic/debian12"
+	# Definición do router-firewall FW
+	config.vm.define "fw" do |fw|
+		fw.vm.hostname = "fw"
+		fw.vm.network "public_network", bridge: interfaz_bridge , ip: ip_pub , netmask: mascara
+		fw.vm.network "private_network", ip: "172.16.5.5", netmask: "255.255.255.0" , gateway: "172.16.5.1"
+		#configurar enrutado
+		fw.vm.provision "shell",
+                        run: "always",
+                        path: "enrutamiento.sh"
+
+		# Configurar Iptables
+		fw.vm.provision "shell",
+			run: "always",
+			path: "iptables.sh"
+		# Eliminar default gw da rede NAT creada por defecto
+                fw.vm.provision "shell",
+                        run: "always",
+                        inline: "ip route del default"
+
+		# Default Router
+		fw.vm.provision "shell",
+			run: "always",
+			inline: "ip route add default via 192.168.1.1"
+		fw.vm.provider "virtualbox" do |vb|
+			vb.name = "fw"
+			vb.gui = true
+			vb.memory = "1024"
+			vb.cpus = 1
+			vb.linked_clone = true
+			vb.customize ["modifyvm", :id, "--groups", "/MasofieAutoDeploy"]
+		end
+	end
+end
+
+~~~
