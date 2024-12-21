@@ -1,4 +1,4 @@
-# Explicación de Creación y Configuración de las Máquinas
+# Explicación de Ejecutar el Vagranfile y Dominio
 
 
 *************************************************
