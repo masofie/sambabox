@@ -1,4 +1,4 @@
-# Explicación de Ejecutar el Vagranfile y Dominio
+# Explicación de Ejecución de Vagranfile y Dominio
 
 
 *************************************************
