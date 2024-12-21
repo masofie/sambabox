@@ -1,5 +1,7 @@
 # Explicación de Ejecución de Vagranfile y Dominio
 
+Sigue los siguientes pasos para ejecutar e iniciar el vagrantfile y el dominio de
+samba-tool , ponle atención a las recomendaciones te serviran de ayuda : 
 
 *************************************************
 	- MÉTODO DE EJECUCIÓN DE VAGRANT : 
