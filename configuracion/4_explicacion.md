@@ -28,8 +28,6 @@ Sigue los siguientes pasos para ejecutar e iniciar el Vagrantfile y el dominio d
 
 		OSEA, EN ESTAS PARTES EXACTAMENTE :
 
-		# LINEAS HA MODIFICAR
-		
 		ip_pub="--------"
 		fw.vm.network "private_network", ip: "172.16.5.5", netmask: "255.255.255.0", gateway: "-----------"
 		inline: "ip route add default via -----------"
