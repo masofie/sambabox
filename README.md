@@ -1,28 +1,48 @@
-# SambaBox : Gestión de Dominio , Usuarios y Servicios
-
-
-**SambaBox** es una herramienta que integra la entornos virtualizados utilizando **Vagrant** y **Samba-Tool**  para gestionar los dominios . 
-Este proyecto permitirá gestionar dominios , redes , usuarios y servicios en **Samba-Tool** utilizando entornos virtualizados de **Vagrant** , automatizando las tareas de instalación y configuración del sistema , lo que mejorará el rendimiento y reducirá los errores .
-En nuestro espacio tendremos 4 máquinas , que son las siguientes : 
-
+# 🔧 SambaBox: Gestión de Dominio, Usuarios y Servicios
 <br>
 
-- **Máquina Firewall :** proporcionará la red a los equipos del dominio .
-- **Máquina Server :** es la que alojará el dominio , con todos los scripts necesarios .
-- **Máquina Clientes :** con Windows e Ubuntu para probar el funcionamiento del dominio con 
-- los usuarios finales .
+**``SambaBox``** es una herramienta educativa que utiliza *``Vagrant``* y *``Samba-Tool``* para desplegar y administrar un **dominio Samba4** de forma **automática** en un entorno virtualizado. Incluye un *``firewall``* , un *``servidor de dominio``* , y clientes Windows y Ubuntu para realizar pruebas reales.
 
-Con todo esto buscamos crear un entorno donde los equipos estén conectados al dominio de 
-forma automatizadas , garantizando una administración centralizada y eficiente .
+> Ideal para aprender y practicar administración de redes y sistemas 🧠💻
+<br>
+<br>
 
-## Especificaciones Técnicas
 
-Para desarrollar este proyecto se utilizará **Vagrant** junto con un proveedor de virtualización que será **VirtualBox** . Se configurará el entorno donde se gestionarán las máquinas virtuales 
-necesarias para gestionar las pruebas . Y el sistema tiene que estar preparado para soportar la 
-configuración de  redes y almacenamiento compartido .
-Vagrant se instalará en **Windows** en este caso , asegurando la correcta configuración de la **PATH** y disponibilidad de los boxes necesarios para cada entorno . Esto facilitará las recopilación del entorno en las diferentes máquinas y sistemas operativos .
-Y ademas se instalá **Samba-Tool**  mediante scripts para automatizar la creación y gestión del 
-dominio dentro de la red , permitido administrar usuarios y permisos . 
+## 📦 Máquinas Virtuales Incluidas
+<br>
+
+
+| Máquina           | Función                                                                 |
+|----------------   |-------------------------------------------------------------------------|
+| 🔥 Firewall       | Controla el acceso a Internet y enruta la red interna                   |
+| 🖥️ Servidor       | Aloja el dominio Samba4 y ejecuta los scripts de configuración          |
+| 🐧 Cliente Linux  | Cliente Ubuntu para probar autenticación en el dominio                  |
+| 🪟 Cliente Win    | Cliente Windows (requiere imagen ISO) para unirse al dominio            |
+
+<br>
+<br>
+
+## ⚙️ Requisitos
+
+Antes de comenzar, asegúrate de tener instalado:
+
+- 🧰 [Vagrant](https://www.vagrantup.com/downloads)
+- 📦 [VirtualBox](https://www.virtualbox.org/)
+- 🪟 Windows (con Vagrant añadido al PATH)
+- 💽 ISO de Windows (para el cliente Windows, si se incluye)
+
+<br>
+<br>
+
+## 🚀 Instrucciones de uso
+
+1. **Clona el repositorio**  
+   ```bash
+   git clone https://github.com/tuusuario/SambaBox.git
+   cd SambaBox
+
+<br>
+<br>
 
 
 ![Esquema de la Red](./configuracion/img/esquema_red.png)
