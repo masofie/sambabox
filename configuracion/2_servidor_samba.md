@@ -31,9 +31,9 @@ Este equipo se encarga de proporcionar a los usuarios :
   - ✉️ Un servicio de correo para el intercambio de información
 
 <br>
-<br>
 
 ## ⚙️ 1. Configuración Vagrant
+<br>
 
 ### 🧩 1.1 Vagrantfile
 <br>
@@ -85,15 +85,15 @@ end
 
 Este script:
 
-    📌 Crea y configura el dominio Samba4 (samba-tool domain provision)
+  - 📌 Crea y configura el dominio Samba4 (``samba-tool`` domain provision)
 
-    🕒 Configura la zona horaria y el NTP
+  - 🕒 Configura la zona horaria y el ``NTP``
 
-    ❌ Elimina Bind9
+  - ❌ Elimina ``Bind9``
 
-    ⚙️ Inicia y activa samba-ad-dc
+  - ⚙️ Inicia y activa ``samba-ad-dc``
 
-    🔍 Realiza comprobaciones DNS y LDAP
+  - 🔍 Realiza comprobaciones ``DNS`` y ``LDAP``
 
 <br>
 <br>
