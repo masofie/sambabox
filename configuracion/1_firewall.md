@@ -19,14 +19,12 @@
 Este equipo cumple el rol de proveedor de acceso a Internet para el resto de máquinas en la red privada. Funciona como un puente ``(gateway)`` que enruta el tráfico entre la red interna y externa , aplicando además reglas de seguridad mediante ``iptables`` .
 
 <br>
-<br>
 
 ## 🔧 1. Firewall
 <br>
 
 Aquí se define la configuración general del ``firewall`` , incluyendo el uso de Vagrant para levantar la máquina virtual y conectarla correctamente a las redes.
 
-<br>
 <br>
 
 ### 🛠️ 1.1 Vagrant
