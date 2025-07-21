@@ -42,7 +42,7 @@ Antes de comenzar, asegúrate de tener instalado:
 <br>
 <br>
 
-## 🚀 Instrucciones de uso
+## 🚀 Instrucciones de Uso
 <br>
 
 1. **Clona el Repositorio** 
@@ -55,4 +55,4 @@ Antes de comenzar, asegúrate de tener instalado:
 <br>
 
 
-- [Contenido](./configuracion/README.md)
+- [📂 Contenido](./configuracion/README.md)
