@@ -350,24 +350,24 @@ venta-departamentos:10005
 <br>
 
 - Formato por línea:
- ```bash
+  
+   ```bash
   usuario:Nombre:Apellido:Grupo:UID
- ```
+
 
 - 🧑‍💼 Ejemplo - Empleados:
- ```bash
+
+   ```bash
 ana:Ana:Lopez:empleados:10001
 pedro:Pedro:Sanchez:empleados:10002
- ```
-...
 
 - 🧑‍💼 Ejemplo - Clientes:
- ```bash
+
+   ```bash
 elena:Elena:Lopez:clientes:10001
 roberto:Roberto:Sanchez:clientes:10002
-...
- ```
 
+<br>
 <br>
 
 ~~~
