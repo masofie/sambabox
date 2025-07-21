@@ -361,6 +361,7 @@ venta-departamentos:10005
 ana:Ana:Lopez:empleados:10001
 pedro:Pedro:Sanchez:empleados:10002
 
+
 - 🧑‍💼 Ejemplo - Clientes:
 
    ```bash
