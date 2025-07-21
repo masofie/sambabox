@@ -11,7 +11,7 @@
 <br>
 
 <p align="center">
-  <img src="./configuracion/img/esquema_red.png" alt="Esquema de red" width="400"/>
+  <img src="./configuracion/img/esquema_red.png" alt="Esquema de red" width="300"/>
 </p>
 
 
