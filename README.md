@@ -51,10 +51,8 @@ Antes de comenzar, asegúrate de tener instalado:
 <br>
 
 <p align="center">
-  <img src="./configuracion/img/esquema_red.png" alt="Esquema de red" width="500"/>
+  <img src="./configuracion/img/esquema_red.png" alt="Esquema de red" width="200"/>
 </p>
-
-![Esquema de la red](./configuracion/img/esquema_red.png)
 
 
 <br>
