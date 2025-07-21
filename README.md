@@ -50,6 +50,10 @@ Antes de comenzar, asegúrate de tener instalado:
 # 🗂️ Estructura del Repositorio
 <br>
 
+<p align="center">
+  <img src="./configuracion/img/esquema_red.png" alt="Esquema de red" width="500"/>
+</p>
+
 ![Esquema de la red](./configuracion/img/esquema_red.png)
 
 
