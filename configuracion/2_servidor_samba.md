@@ -1,96 +1,102 @@
-# Servidor de Dominio 
+# 🖥️ Servidor de Dominio
+<br>
 
-## Indice 
-- [Servidor de Dominio](#servidor-de-dominio)
-  - [Indice](#indice)
-  - [Definición](#definición)
-  - [1. Configuración Vagrant](#1-configuración-vagrant)
-    - [1.1 Vagrantfile](#11-vagrantfile)
-  - [2. Scripts Dominios](#2-scripts-dominios)
-    - [2.1 Dominio Samba](#21-dominio-samba)
-    - [2.2 Unidades Organizativas](#22-unidades-organizativas)
-    - [2.3 Grupos](#23-grupos)
-    - [2.4 Usuarios (Empelados/Clientes)](#24-usuarios-empeladosclientes)
-  - [3. Carperta Compartida Dominio](#3-carperta-compartida-dominio)
-    - [3.1 Grupos](#31-grupos)
-    - [3.2 Usuarios (Empleados/Clientes)](#32-usuarios-empleadosclientes)
+**📑 Indice**
+- [🖥️ Servidor de Dominio](#️-servidor-de-dominio)
+- [🧾 Definición](#-definición)
+  - [⚙️ 1. Configuración Vagrant](#️-1-configuración-vagrant)
+    - [🧩 1.1 Vagrantfile](#-11-vagrantfile)
+  - [🧰 2. Scripts de Dominio](#-2-scripts-de-dominio)
+    - [🛠️ 2.1 Dominio Samba](#️-21-dominio-samba)
+    - [🗂️ 2.2 Unidades Organizativas](#️-22-unidades-organizativas)
+    - [👥 2.3 Grupos](#-23-grupos)
+    - [👤 2.4 Usuarios (Empleados / Clientes)](#-24-usuarios-empleados--clientes)
+  - [📁 3. Carpeta Compartida del Dominio](#-3-carpeta-compartida-del-dominio)
+    - [🗂️ 3.1 Grupos ``(grupos.cnf)``](#️-31-grupos-gruposcnf)
+    - [👤 3.2 Usuarios (``empleados.cnf`` / ``clientes.cnf``)](#-32-usuarios-empleadoscnf--clientescnf)
 
+<br>
 
-## Definición 
+# 🧾 Definición
+<br>
 
-Este equipo tendrá que proporcionar a los usuarios unidades organizativas , grupos , usuarios y un servicio de correo para intercambiar información entre ellos .
+Este equipo se encarga de proporcionar a los usuarios :
 
-## 1. Configuración Vagrant 
+    🔹 Unidades organizativas
 
-### 1.1 Vagrantfile
+    🔹 Grupos
+
+    🔹 Usuarios
+
+    ✉️ Un servicio de correo para el intercambio de información
+
+<br>
+<br>
+
+## ⚙️ 1. Configuración Vagrant
+
+### 🧩 1.1 Vagrantfile
+<br>
 
 ~~~
 Vagrant.configure("2") do |config|
-	config.vm.box = "generic/debian12"
-	# Definición do router-firewall Server
-	config.vm.define "server" do |server|
-		server.vm.hostname = "server"
-		server.vm.network "private_network", ip: "172.16.5.10", netmask: "255.255.255.0" , gateway: "172.16.5.5"
-		
-		# Instalacion de Dominio Samba-Tool 
-		server.vm.provision "shell",
-                        run: "always",
-                        path: "dominio_samba.sh"
+  config.vm.box = "generic/debian12"
 
-		# Creacion de Unidades Organizativas 
-		server.vm.provision "shell",
-                        run: "always",
-                        path: "unidades.sh"
+  config.vm.define "server" do |server|
+    server.vm.hostname = "server"
+    server.vm.network "private_network", ip: "172.16.5.10", netmask: "255.255.255.0", gateway: "172.16.5.5"
 
-		# Creacion de Grupos
-		server.vm.provision "shell",
-                        run: "always",
-                        path: "grupos.sh"
+    # Provisionamiento
+    server.vm.provision "shell", run: "always", path: "dominio_samba.sh"
+    server.vm.provision "shell", run: "always", path: "unidades.sh"
+    server.vm.provision "shell", run: "always", path: "grupos.sh"
+    server.vm.provision "shell", run: "always", path: "empleados.sh"
+    server.vm.provision "shell", run: "always", path: "clientes.sh"
+    server.vm.provision "shell", run: "always", path: "./correo/00_ejecucion_remota.sh"
 
-		# Creacion de Empleados  
-		server.vm.provision "shell",
-                        run: "always",
-                        path: "empleados.sh"
+    # Carpetas compartidas
+    server.vm.synced_folder "./compartida", "/home/vagrant/compartida"
+    server.vm.synced_folder "./correo", "/home/vagrant/correo"
 
-		# Creacion de Clientes
-		server.vm.provision "shell",
-                        run: "always",
-                        path: "clientes.sh"
+    # Rutas por defecto
+    server.vm.provision "shell", run: "always", inline: "ip route del default"
+    server.vm.provision "shell", run: "always", inline: "ip route add default via 172.16.5.5"
 
-		# Creacion de Servidor de Correos
-		server.vm.provision "shell",
-                        run: "always",
-                        path: "./correo/00_ejecucion_remota.sh"
-
-		# Carpeta Compartida 
-		server.vm.synced_folder "./compartida" , "/home/vagrant/compartida"
-		server.vm.synced_folder "./correo" , "/home/vagrant/correo"
-
-		# Eliminar default gw da rede NAT creada por defecto
-        server.vm.provision "shell",
-                        run: "always",
-                        inline: "ip route del default"
-
-		# Default Router
-		server.vm.provision "shell",
-						run: "always",
-						inline: "ip route add default via 172.16.5.5"
-		server.vm.provider "virtualbox" do |vb|
-						vb.name = "server"
-						vb.gui = true
-						vb.memory = "1024"
-						vb.cpus = 1
-						vb.linked_clone = true
-						vb.customize ["modifyvm", :id, "--groups", "/MasofieAutoDeploy"]
-		end
-	end
+    server.vm.provider "virtualbox" do |vb|
+      vb.name = "server"
+      vb.gui = true
+      vb.memory = "1024"
+      vb.cpus = 1
+      vb.linked_clone = true
+      vb.customize ["modifyvm", :id, "--groups", "/MasofieAutoDeploy"]
+    end
+  end
 end
 ~~~
+<br>
+<br>
 
 
-## 2. Scripts Dominios 
+## 🧰 2. Scripts de Dominio
+<br>
 
-### 2.1 Dominio Samba
+### 🛠️ 2.1 Dominio Samba
+<br>
+
+Este script:
+
+    📌 Crea y configura el dominio Samba4 (samba-tool domain provision)
+
+    🕒 Configura la zona horaria y el NTP
+
+    ❌ Elimina Bind9
+
+    ⚙️ Inicia y activa samba-ad-dc
+
+    🔍 Realiza comprobaciones DNS y LDAP
+
+<br>
+<br>
 
 ~~~
 #!/bin/bash
@@ -160,8 +166,26 @@ host -t SRV _ldap._tcp.$MAQUINA.local
 host -t SRV _kerberos._udp.$MAQUINA.local
 host -t A $MAQUINA.$DOMINIO.local
 ~~~
+<br>
+<br>
 
-### 2.2 Unidades Organizativas
+
+### 🗂️ 2.2 Unidades Organizativas
+<br>
+
+Crea las siguientes OUs:
+
+> - OU=usuarios
+>   - OU=empleados
+>   - OU=clientes
+>
+> - OU=departamento
+>   - OU=taller
+>   - OU=venta
+>   - OU=grupos
+
+<br>
+<br>
 
 ~~~
 #!/bin/bash
@@ -182,8 +206,21 @@ samba-tool ou create "OU=venta,OU=departamento,DC=$DOMINIO,DC=local" --descripti
 # Grupos 
 samba-tool ou create "OU=grupos,DC=$DOMINIO,DC=local" --description="UO grupos"
 ~~~
+<br>
+<br>
 
-### 2.3 Grupos 
+
+
+### 👥 2.3 Grupos
+<br>
+
+El script ``grupos.sh`` :
+
+    📄 Lee el archivo grupos.cnf con el formato nombre:GID
+
+    🔄 Crea los grupos en la OU grupos usando samba-tool group add
+
+<br>
 
 ~~~
 #!/bin/bash
@@ -202,7 +239,28 @@ do
 done
 ~~~
 
-### 2.4 Usuarios (Empelados/Clientes)
+<br>
+<br>
+
+
+### 👤 2.4 Usuarios (Empleados / Clientes)
+<br>
+
+Ambos scripts (empleados.sh y clientes.sh) realizan:
+
+- 👨‍💼 Lectura de datos desde ``empleados.cnf`` o ``clientes.cnf``
+
+- 🔐 Creación del usuario con:
+
+  - Nombre, apellidos
+
+  - UID, OU, grupo
+
+  - Ruta de perfil, carpeta personal, script de inicio
+
+- 👥 Añaden el usuario a usuarios y a su grupo correspondiente
+
+<br>
 
 ~~~
 #!/bin/bash
@@ -234,6 +292,9 @@ for emp in $(cat $ficheros_grupos | grep -v "^#" | tr -d '\r'); do
 done < /home/vagrant/compartida/empleados.cnf
 ~~~
 
+<br>
+<br>
+
 ~~~
 #!/bin/bash
 
@@ -263,10 +324,15 @@ for emp in $(cat $ficheros_grupos | grep -v "^#" | tr -d '\r'); do
     samba-tool group addmembers "$GRUPO-usuarios" $LOGIN
 done < /home/vagrant/compartida/empleados.cnf
 ~~~
+<br>
+<br>
 
-## 3. Carperta Compartida Dominio
 
-### 3.1 Grupos 
+## 📁 3. Carpeta Compartida del Dominio
+<br>
+
+### 🗂️ 3.1 Grupos ``(grupos.cnf)``
+<br>
 
 ~~~
 usuarios:10000
@@ -276,8 +342,33 @@ departamentos:10003
 taller-departamentos:10004
 venta-departamentos:10005
 ~~~
+<br>
+<br>
 
-### 3.2 Usuarios (Empleados/Clientes)
+
+### 👤 3.2 Usuarios (``empleados.cnf`` / ``clientes.cnf``)
+<br>
+
+- Formato por línea:
+ ```bash
+  usuario:Nombre:Apellido:Grupo:UID
+ ```
+
+- 🧑‍💼 Ejemplo - Empleados:
+ ```bash
+ana:Ana:Lopez:empleados:10001
+pedro:Pedro:Sanchez:empleados:10002
+ ```
+...
+
+- 🧑‍💼 Ejemplo - Clientes:
+ ```bash
+elena:Elena:Lopez:clientes:10001
+roberto:Roberto:Sanchez:clientes:10002
+...
+ ```
+
+<br>
 
 ~~~
 ana:Ana:Lopez:empleados:10001
