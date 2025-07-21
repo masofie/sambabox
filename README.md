@@ -1,7 +1,7 @@
 # 🔧 SambaBox: Gestión de Dominio, Usuarios y Servicios
 <br>
 
-**``SambaBox``** es una herramienta educativa que utiliza *``Vagrant``* y *``Samba-Tool``* para desplegar y administrar un **dominio Samba4** de forma **automática** en un entorno virtualizado. Incluye un *``firewall``* , un *``servidor de dominio``* , y clientes Windows y Ubuntu para realizar pruebas reales.
+**``SambaBox``** es una herramienta educativa que utiliza Vagrant y Samba-Tool para desplegar y administrar un **dominio samba4** de forma **automática** en un entorno virtualizado. Incluye un *``firewall``* , un *``servidor de dominio``* , y *``clientes Windows``* y Ubuntu para realizar pruebas reales.
 
 > Ideal para aprender y practicar administración de redes y sistemas 🧠💻
 <br>
@@ -23,6 +23,7 @@
 <br>
 
 ## ⚙️ Requisitos
+<br>
 
 Antes de comenzar, asegúrate de tener instalado:
 
@@ -35,6 +36,7 @@ Antes de comenzar, asegúrate de tener instalado:
 <br>
 
 ## 🚀 Instrucciones de uso
+<br>
 
 1. **Clona el repositorio**  
    ```bash
@@ -44,6 +46,21 @@ Antes de comenzar, asegúrate de tener instalado:
 <br>
 <br>
 
+
+# 🗂️ Estructura del Repositorio
+<br>
+
+Internet
+   │
+Firewall (con NAT)
+   │
+Red Interna
+ ┌────────────┬────────────┐
+ │   Server   │  Clientes  │
+ └────────────┴────────────┘
+
+<br>
+<br>
 
 ![Esquema de la Red](./configuracion/img/esquema_red.png)
 
