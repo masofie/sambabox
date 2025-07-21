@@ -22,13 +22,13 @@
 
 Este equipo se encarga de proporcionar a los usuarios :
 
-- 🔹 Unidades organizativas
+  - 🔹 Unidades organizativas
 
-- 🔹 Grupos
+  - 🔹 Grupos
 
-- 🔹 Usuarios
+  - 🔹 Usuarios
 
-- ✉️ Un servicio de correo para el intercambio de información
+  - ✉️ Un servicio de correo para el intercambio de información
 
 <br>
 <br>
