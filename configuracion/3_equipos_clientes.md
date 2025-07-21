@@ -1,101 +1,149 @@
-# Equipos Clientes 
+# 💻 Equipos Clientes 
+<br>
 
-## Indice 
-- [Equipos Clientes](#equipos-clientes)
-  - [Indice](#indice)
-  - [1. Windows 10](#1-windows-10)
-    - [1.1 Configuración Básica](#11-configuración-básica)
-    - [1.2 Unir Equipo al Dominio](#12-unir-equipo-al-dominio)
-    - [1.3 Comprobaciones](#13-comprobaciones)
-  - [2. Debian-10](#2-debian-10)
-    - [2.1 Configuración Básica](#21-configuración-básica)
-    - [2.2 Instalación de Paquetes Necesarios](#22-instalación-de-paquetes-necesarios)
-    - [2.3 Comprobaciones](#23-comprobaciones)
-  - [3. Archivo Necesario](#3-archivo-necesario)
-    - [3.1 Vagrantfile](#31-vagrantfile)
+**📑 Indice**
+- [💻 Equipos Clientes](#-equipos-clientes)
+	- [🪟 1. Windows 10](#-1-windows-10)
+		- [⚙️ 1.1 Configuración Básica](#️-11-configuración-básica)
+		- [🔐 1.2 Unir Equipo al Dominio](#-12-unir-equipo-al-dominio)
+		- [✅ 1.3 Comprobaciones](#-13-comprobaciones)
+	- [🐧 2. Debian 10](#-2-debian-10)
+		- [⚙️ 2.1 Configuración Básica](#️-21-configuración-básica)
+		- [2.2 Instalación de Paquetes Necesarios](#22-instalación-de-paquetes-necesarios)
+		- [2.3 Comprobaciones](#23-comprobaciones)
+	- [3. Archivo Necesario](#3-archivo-necesario)
+		- [3.1 Vagrantfile](#31-vagrantfile)
+
+<br>
+
+## 🪟 1. Windows 10
+<br>
+
+### ⚙️ 1.1 Configuración Básica
+<br>
 
 
-## 1. Windows 10
-
-### 1.1 Configuración Básica
-
-En el equipo de **Windows 10** visualizamos la ip de nuestra máquina para ver si tomo la configuración correcta 
-
+1 - 📡 Verificamos la ``ip`` del equipo para confirmar que recibió la configuración de red correctamente .
 
 ![Mostrar ip Antes de la Configuración](./img/clientes_w10/mostrar_ip_red_antes.png)
+<br>
+<br>
 
 
-Añadimos la ip del servidor de dominio en los servidores de resolución de ***dns*** para poder añadir el equipo al dominio 
+2 - 🧭 Añadimos la ``ip`` del servidor de dominio en las configuraciones de ``dns`` para que pueda resolver el nombre del dominio.
 
 ![IP de Resolución de Dominio](./img/clientes_w10/2_ip_del_servidor_samba.png)
+<br>
+<br>
 
 
-Después cambaimos el nombre al equipo para así poder indentificarlo mejor a la hora de buscarlo en el servidor . Te pedirá que reinicies el equipo , lo reinicias y esperamos a que reinice para que tome el nuevo nombre 
+3 - 🖥️ Cambiamos el nombre del equipo para facilitar su identificación desde el servidor .💡 Windows solicitará reiniciar para aplicar el nuevo nombre.
 
 ![Cambio de Nombre al Equipo Windows](./img/clientes_w10/3_cambio_de_nombre.png)
+<br>
+<br>
 
-### 1.2 Unir Equipo al Dominio
 
-Ahora iniciamos con la unión del dominio de la siguiente manera . Lo unimos con el usuario **"Administrator"** que es el biene por defecto en los dominios para iniciar sesión 
+
+### 🔐 1.2 Unir Equipo al Dominio
+<br>
+
+1 - Iniciamos el proceso de unión al dominio con el usuario ``Administrator`` (por defecto en Samba)
 
 ![Uniendo el equipo al dominio -1](./img/clientes_w10/4_unir_al_dominio.png)
+<br>
+<br>
 
 
-***"POSIBLE ERROR : A LA HORA DE UNIR EL EQUIPO AL DOMINIO PUEDE QUE NO LO ENCUENTRE Y TE DE FALLOS ENTONCES PARA SOLUCIONAR ESTE PROBLEMA SOLO ACTULIZAMOS EL SERVIDOR CON UN UPDATE Y YA VEREMOS QUE NOS FUNCIONA"***
+
+2 - ⚠️ ``POSIBLE ERROR`` : Si no encuentra el dominio, actualiza el servidor con :
+ 
+ ```bash
+apt update
+ ```
 
 ![Uniendo el equipo al dominio - UPDATE](./img/clientes_w10/5_unir_al_dominio_UPDATE.png)
 
-Si el dominio se unió correctamente nos muestra el siguiente mensaje en el entorno de windows , se ve de la siguiente manera 
+<br>
+<br>
+
+
+
+3 - Si la unión es correcta, Windows mostrará un mensaje de confirmación. 🎉
 
 ![Uniendo el equipo al dominio - MENSAJE](./img/clientes_w10/6_unir_al_dominio_MENSAJE.png)
+<br>
+<br>
 
 
-### 1.3 Comprobaciones 
 
-Ahora comprobamos en el servidor que podmeos ver nuestro equipo de **windows 10** añadido correctamente 
+### ✅ 1.3 Comprobaciones
+<br>
 
-~~~
+1 - Desde el servidor, ejecutamos :
+
+ ```bash
 samba-tool computer list
-~~~
+ ```
+
+🔎 Aquí debe aparecer el nombre del equipo Windows.
+
 
 ![Uniendo el equipo al dominio - COMPUTER](./img/clientes_w10/7_w10_servidor_computer.png)
+<br>
+<br>
 
-En el equipo de **Windows 10** iniciamos sesión con el usuario ***administrator*** de la siguiente manera 
+
+2 - En Windows, iniciamos sesión como ``Administrator`` del dominio.
+ 
 
 ![Uniendo el equipo al dominio-INICIO DE SESIÓN ADMINISTRATOR](./img/clientes_w10/8_unir_al_dominio_ADMINISTRATOR.png)
+<br>
+<br>
 
-Iniciamos con un usuario que este en el dominio y desde el terminal podemos ver que esta unido correctamente 
+
+3 - También podemos comprobar desde terminal :
 
 ~~~
 ipconfig /all
 ~~~
 
-
 ![Uniendo el equipo al dominio-INICIO DE SESIÓN](./img/clientes_w10/8_w10_inicio_de_sesion.png)
+<br>
+<br>
 
 
-## 2. Debian-10 
 
-### 2.1 Configuración Básica
+## 🐧 2. Debian 10
+<br>
 
-Antes de unir el equipo al dominio comprobamos el nombre del equipo para poder comprobar desde el servidor el nombre del cliente y poder identificarlos 
+### ⚙️ 2.1 Configuración Básica
+<br>
+
+1 - Verificamos el nombre del equipo con :
 
 ~~~
 hostname
 ~~~
 
+🏷️ Esto facilita identificarlo desde el servidor.
 
 ![Cliente Linux - Nombre del Equipo](./img/cliente_linux/1_cliente_linux_nombre.png)
+<br>
+<br>
 
 
-Añadimos el servidor de **DNS** en el fichero ***/etc/resolv.conf*** para buscar la resolución de nombre del dominio 
+
+2 - Editamos el archivo ``/etc/resolv.conf`` y añadimos la IP del servidor ``dns`` :
 
 ~~~
 nano /etc/resolv.conf
 ~~~
 
-
 ![Cliente Linux - Servidores de Búsqueda DNS](./img/cliente_linux/2_cliente_linux_fichero_dns.png)
+<br>
+<br>
+
 
 
 ### 2.2 Instalación de Paquetes Necesarios 
