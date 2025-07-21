@@ -358,15 +358,15 @@ venta-departamentos:10005
 - 🧑‍💼 Ejemplo - Empleados:
 
    ```bash
-ana:Ana:Lopez:empleados:10001
-pedro:Pedro:Sanchez:empleados:10002
+  ana:Ana:Lopez:empleados:10001
+  pedro:Pedro:Sanchez:empleados:10002
 
 
 - 🧑‍💼 Ejemplo - Clientes:
 
    ```bash
-elena:Elena:Lopez:clientes:10001
-roberto:Roberto:Sanchez:clientes:10002
+  elena:Elena:Lopez:clientes:10001
+  roberto:Roberto:Sanchez:clientes:10002
 
 <br>
 <br>
