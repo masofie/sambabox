@@ -1,6 +1,9 @@
-# Explicación de Ejecución de Vagrantfile y Dominio
+# 📝 Explicación de Ejecución de Vagrantfile y Dominio
+<br>
 
-Sigue los siguientes pasos para ejecutar e iniciar el Vagrantfile y el dominio de `samba-tool`, ponle atención a las recomendaciones, te servirán de ayuda:
+Sigue los siguientes pasos para ejecutar e iniciar el Vagrantfile y el dominio de ``samba-tool`` , ponle atención a las recomendaciones , te servirán de ayuda :
+
+<br>
 
 ~~~~
 - 🚀 MÉTODO DE EJECUCIÓN DE VAGRANT:
@@ -23,8 +26,8 @@ MODIFICA EL SCRIPT EN LA PARTE DE LA RED PÚBLICA Y AÑADE AHÍ TU RED, POR SI T
 
 OSEA, EN ESTAS PARTES EXACTAMENTE:
 
-```bash
-ip_pub="**********"
-fw.vm.network "private_network", ip: "172.16.5.5", netmask: "255.255.255.0", gateway: "**********"
-inline: "ip route add default via **********"
+
+ip_pub="--------"
+fw.vm.network "private_network", ip: "172.16.5.5", netmask: "255.255.255.0", gateway: "-----------"
+inline: "ip route add default via -----------"
 ~~~~
