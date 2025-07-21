@@ -211,7 +211,7 @@ nano /etc/samba/smb.conf
 
 
 
-6 - Finalmente, unimos el equipo al dominio :
+6 - Finalmente , unimos el equipo al dominio :
 
 ~~~
 net ads join -U administrator
@@ -225,7 +225,7 @@ net ads join -U administrator
 ### ✅ 2.3 Comprobaciones
 <br>
 
-1 - Desde el cliente :
+1 - Desde el cliente , comprobamos nuestro dominio :
 
 ~~~
 net ads testjoin
@@ -237,7 +237,7 @@ net ads info
 <br>
 
 
-2 - Desde el servidor :
+2 - Desde el servidor listamos los equipos unidos al dominio :
 
 ~~~
 samba-tool computer list
