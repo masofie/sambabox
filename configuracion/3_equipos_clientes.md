@@ -152,11 +152,7 @@ nano /etc/resolv.conf
 ### 📦 2.2 Instalación de Paquetes Necesarios
 <br>
 
-1 - ⚠️ Si ``apt`` no funciona , usamos aptitude. Primero actualizamos paquetes :
-
-
-
-***"POSIBLE ERROR :*** ***ANTES DE EJECUTAR ESTOS COMANDOS ACTULIZAMOS EL SISTEMA CON UN "APT UPDATE" PARA ACTULIZAR LOS PAQUETES Y QUE FUNCIONEN CORRECTAMENTE"***
+1 - ⚠️ Si ``apt`` no funciona , usamos ``aptitud`e`` . Un posible error es ``NO ENCONTRAR EL DOMINIO``  por eso hay que usar el *``update`` : 
 
 ~~~
 apt update
