@@ -45,7 +45,8 @@ Antes de comenzar, asegúrate de tener instalado:
 ## 🚀 Instrucciones de uso
 <br>
 
-1. **Clona el Repositorio**  
+1. **Clona el Repositorio** 
+ 
    ```bash
    git clone https://github.com/tuusuario/SambaBox.git
    cd SambaBox
