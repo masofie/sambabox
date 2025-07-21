@@ -1,8 +1,11 @@
-# SambaBox : Configuración de las Máquinas
+# 🚀 SambaBox : Configuración de las Máquinas
+<br>
 
-1. [Firewall](./1_firewall.md)
-2. [Servidor Samba](./2_servidor_samba.md)
-3. [Equipos Clientes](./3_equipos_clientes.md)
-4. [Explicación de Ejecución](./4_explicacion.md)
+📂 Configuración
+
+1. [🔥Firewall](./1_firewall.md)
+2. [🗄️Servidor Samba](./2_servidor_samba.md)
+3. [💻 Equipos Clientes](./3_equipos_clientes.md)
+4. [📝Explicación de Ejecución](./4_explicacion.md)
 
 
