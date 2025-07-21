@@ -216,9 +216,9 @@ samba-tool ou create "OU=grupos,DC=$DOMINIO,DC=local" --description="UO grupos"
 
 El script ``grupos.sh`` :
 
-    📄 Lee el archivo grupos.cnf con el formato nombre:GID
+  - 📄 Lee el archivo ``grupos.cnf`` con el formato ``nombre:GID``
 
-    🔄 Crea los grupos en la OU grupos usando samba-tool group add
+  - 🔄 Crea los grupos en la OU grupos usando ``samba-tool group add``
 
 <br>
 
