@@ -68,11 +68,4 @@ Antes de comenzar, asegúrate de tener instalado:
 └────────────┘       └────────────────┘        └────────────────┘
 
 
-
-<br>
-<br>
-
-![Esquema de la Red](./configuracion/img/esquema_red.png)
-
-
 - [Contenido](./configuracion/README.md)
