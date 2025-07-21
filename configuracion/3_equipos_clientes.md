@@ -9,10 +9,10 @@
 		- [✅ 1.3 Comprobaciones](#-13-comprobaciones)
 	- [🐧 2. Debian 10](#-2-debian-10)
 		- [⚙️ 2.1 Configuración Básica](#️-21-configuración-básica)
-		- [2.2 Instalación de Paquetes Necesarios](#22-instalación-de-paquetes-necesarios)
-		- [2.3 Comprobaciones](#23-comprobaciones)
-	- [3. Archivo Necesario](#3-archivo-necesario)
-		- [3.1 Vagrantfile](#31-vagrantfile)
+		- [📦 2.2 Instalación de Paquetes Necesarios](#-22-instalación-de-paquetes-necesarios)
+		- [✅ 2.3 Comprobaciones](#-23-comprobaciones)
+	- [📝 3. Archivo Necesario](#-3-archivo-necesario)
+		- [📂 3.1 Vagrantfile](#-31-vagrantfile)
 
 <br>
 
@@ -85,6 +85,7 @@ apt update
  ```bash
 samba-tool computer list
  ```
+<br>
 
 🔎 Aquí debe aparecer el nombre del equipo Windows.
 
@@ -126,6 +127,8 @@ ipconfig /all
 hostname
 ~~~
 
+<br>
+
 🏷️ Esto facilita identificarlo desde el servidor.
 
 ![Cliente Linux - Nombre del Equipo](./img/cliente_linux/1_cliente_linux_nombre.png)
@@ -146,124 +149,143 @@ nano /etc/resolv.conf
 
 
 
-### 2.2 Instalación de Paquetes Necesarios 
+### 📦 2.2 Instalación de Paquetes Necesarios
+<br>
 
-Antes de instalar cualquier paquete tenemos que saber que el comando ***apt*** no funciona , para eso utilizamos el comando ***aptitude*** . Y lo instalamos . 
+1 - ⚠️ Si ``apt`` no funciona , usamos aptitude. Primero actualizamos paquetes :
+
+
 
 ***"POSIBLE ERROR :*** ***ANTES DE EJECUTAR ESTOS COMANDOS ACTULIZAMOS EL SISTEMA CON UN "APT UPDATE" PARA ACTULIZAR LOS PAQUETES Y QUE FUNCIONEN CORRECTAMENTE"***
 
 ~~~
+apt update
 apt install aptitude
 ~~~
+<br>
+<br>
 
-Una vez que instalamos los siguientes paquetes para configurar el Reino de **kerberos** 
+
+
+2 - Instalamos los paquetes necesarios para ``Kerberos`` :
 
 ~~~
 aptitude search krb5-user krb5-config 
 ~~~
 
 ![Cliente Linux - Instalación de Paquetes-1](./img/cliente_linux/3_cliente_linux_comando_aptitude_1.png)
+<br>
+<br>
 
-Ahora instalamos el paquete ***smbclient*** , nos va dar la posibilidad de tener acceso al dominio 
+
+
+3 - Instalamos herramientas para Samba : 
 
 ~~~
 aptitude install smbclient samba-common samba-common-bin
 ~~~
 
 ![Cliente Linux - Instalación de Paquetes-2](./img/cliente_linux/3_cliente_linux_comando_aptitude_1.png)
+<br>
+<br>
 
 
-Editamos el fichero ***/etc/samba/smb.conf*** para especificar el dominio 
+
+4 - Editamos el fichero de configuración :
 
 ~~~
 nano /etc/samba/smb.conf
 ~~~
 
 ![Cliente Linux - Fichero smb](./img/cliente_linux/5_cliente_linux_fichero_smb.png)
+<br>
+<br>
 
 
-Creamos un fichero llamado ***secrets.tdb*** que lo va ha buscar en el fichero anterior los datos . Este fichero lo creamos en el directorio ***/var/lib/samba/private/*** con el nombre del usuario y el dominio que vamos ha utilizar 
+
+5 - Creamos el archivo ``secrets.tdb`` en :
 
 ~~~
-nano /var/lib/samba/private/secrets.tdb
+/var/lib/samba/private/secrets.tdb
 ~~~
 
 ![Cliente Linux - Fichero secrets](./img/cliente_linux/6_cliente_linux_fichero_secrets.png)
+<br>
+<br>
 
-Ejecutamos el comando para unir el equipo al dominio , para ver si funciona correctamente 
+
+
+6 - Finalmente, unimos el equipo al dominio :
 
 ~~~
 net ads join -U administrator
 ~~~
 
 ![Cliente Linux - Equipo Unido al Dominio](./img/cliente_linux/7_cliente_linux_fichero_equipo_unido.png)
+<br>
+<br>
 
-### 2.3 Comprobaciones 
 
-Desde los clientes podemos ejecutar este comando para ver si nos resulve el nombre del dominio 
+### ✅ 2.3 Comprobaciones
+<br>
+
+1 - Desde el cliente :
 
 ~~~
 net ads testjoin
-~~~
-~~~
 net ads info
 ~~~
 
-
 ![Cliente Linux - Comando net](./img/cliente_linux/8_cliente_linux_comando_net.png)
+<br>
+<br>
 
 
-Desde el servidor comprobamos que se ha unido el equipo al cominio mostrados los equipos 
+2 - Desde el servidor :
 
 ~~~
-samba-tool computer list 
+samba-tool computer list
 ~~~
 
 ![Cliente Linux - Comando computer](./img/cliente_linux/9_cliente_linux_comando_computer.png)
+<br>
+<br>
 
-## 3. Archivo Necesario
-### 3.1 Vagrantfile
+
+## 📝 3. Archivo Necesario
+<br>
+
+### 📂 3.1 Vagrantfile
+<br>
+
 
 ~~~
 # Variables
-interfaz_bridge="eno1"
-ip_pub="192.168.1.100"
-mascara="255.255.255.0"
+interfaz_bridge = "eno1"
+ip_pub = "192.168.1.100"
+mascara = "255.255.255.0"
 
 Vagrant.configure("2") do |config|
-	config.vm.box = "generic/debian12"
-	# Definición do router-firewall FW
-	config.vm.define "fw" do |fw|
-		fw.vm.hostname = "fw"
-		fw.vm.network "public_network", bridge: interfaz_bridge , ip: ip_pub , netmask: mascara
-		fw.vm.network "private_network", ip: "172.16.5.5", netmask: "255.255.255.0" , gateway: "172.16.5.1"
-		#configurar enrutado
-		fw.vm.provision "shell",
-                        run: "always",
-                        path: "enrutamiento.sh"
+  config.vm.box = "generic/debian12"
 
-		# Configurar Iptables
-		fw.vm.provision "shell",
-			run: "always",
-			path: "iptables.sh"
-		# Eliminar default gw da rede NAT creada por defecto
-                fw.vm.provision "shell",
-                        run: "always",
-                        inline: "ip route del default"
+  config.vm.define "fw" do |fw|
+    fw.vm.hostname = "fw"
+    fw.vm.network "public_network", bridge: interfaz_bridge, ip: ip_pub, netmask: mascara
+    fw.vm.network "private_network", ip: "172.16.5.5", netmask: "255.255.255.0", gateway: "172.16.5.1"
 
-		# Default Router
-		fw.vm.provision "shell",
-			run: "always",
-			inline: "ip route add default via 192.168.1.1"
-		fw.vm.provider "virtualbox" do |vb|
-			vb.name = "fw"
-			vb.gui = true
-			vb.memory = "1024"
-			vb.cpus = 1
-			vb.linked_clone = true
-			vb.customize ["modifyvm", :id, "--groups", "/MasofieAutoDeploy"]
-		end
-	end
+    fw.vm.provision "shell", run: "always", path: "enrutamiento.sh"
+    fw.vm.provision "shell", run: "always", path: "iptables.sh"
+    fw.vm.provision "shell", run: "always", inline: "ip route del default"
+    fw.vm.provision "shell", run: "always", inline: "ip route add default via 192.168.1.1"
+
+    fw.vm.provider "virtualbox" do |vb|
+      vb.name = "fw"
+      vb.gui = true
+      vb.memory = "1024"
+      vb.cpus = 1
+      vb.linked_clone = true
+      vb.customize ["modifyvm", :id, "--groups", "/MasofieAutoDeploy"]
+    end
+  end
 end
-
 ~~~
