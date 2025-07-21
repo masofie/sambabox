@@ -371,6 +371,8 @@ venta-departamentos:10005
 <br>
 <br>
 
+📄 Archivo donde se guardan los empleados 
+
 ~~~
 ana:Ana:Lopez:empleados:10001
 pedro:Pedro:Sanchez:empleados:10002
@@ -388,6 +390,11 @@ carlos:Carlos:Sanchez:empleados:10013
 valentina:Valentina:Felix:empleados:10014
 luis:Luis:Alcantara:empleados:10015
 ~~~
+
+<br>
+<br>
+
+📄 Archivo donde se guardan todos los clientes  
 
 ~~~
 elena:Elena:Lopez:clientes:10001
