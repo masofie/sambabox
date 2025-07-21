@@ -7,6 +7,13 @@
 <br>
 <br>
 
+# 🗂️ Estructura del Repositorio
+<br>
+
+<p align="center">
+  <img src="./configuracion/img/esquema_red.png" alt="Esquema de red" width="400"/>
+</p>
+
 
 ## 📦 Máquinas Virtuales Incluidas
 <br>
@@ -46,16 +53,5 @@ Antes de comenzar, asegúrate de tener instalado:
 <br>
 <br>
 
-
-# 🗂️ Estructura del Repositorio
-<br>
-
-<p align="center">
-  <img src="./configuracion/img/esquema_red.png" alt="Esquema de red" width="200"/>
-</p>
-
-
-<br>
-<br>
 
 - [Contenido](./configuracion/README.md)
